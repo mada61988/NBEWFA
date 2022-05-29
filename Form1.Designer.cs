@@ -132,6 +132,14 @@
             this.label49 = new System.Windows.Forms.Label();
             this.currentCashProfile = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -1167,6 +1175,76 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label53
+            // 
+            this.label53.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label53.Location = new System.Drawing.Point(305, 325);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(30, 2);
+            this.label53.TabIndex = 155;
+            // 
+            // label55
+            // 
+            this.label55.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label55.Location = new System.Drawing.Point(405, 324);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(200, 2);
+            this.label55.TabIndex = 153;
+            // 
+            // label56
+            // 
+            this.label56.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label56.Location = new System.Drawing.Point(604, 326);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(2, 120);
+            this.label56.TabIndex = 152;
+            this.label56.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // label57
+            // 
+            this.label57.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label57.Location = new System.Drawing.Point(305, 326);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(2, 120);
+            this.label57.TabIndex = 151;
+            this.label57.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // label58
+            // 
+            this.label58.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label58.Location = new System.Drawing.Point(305, 444);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(300, 2);
+            this.label58.TabIndex = 150;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.Location = new System.Drawing.Point(400, 271);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(112, 17);
+            this.label50.TabIndex = 156;
+            this.label50.Text = "Additional Info";
+            // 
+            // label52
+            // 
+            this.label52.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.Location = new System.Drawing.Point(421, 297);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(60, 1);
+            this.label52.TabIndex = 157;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(322, 342);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(70, 13);
+            this.label54.TabIndex = 158;
+            this.label54.Text = "Camera HDD";
+            // 
             // Form1
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
@@ -1175,6 +1253,14 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(622, 531);
+            this.Controls.Add(this.label54);
+            this.Controls.Add(this.label52);
+            this.Controls.Add(this.label50);
+            this.Controls.Add(this.label53);
+            this.Controls.Add(this.label55);
+            this.Controls.Add(this.label56);
+            this.Controls.Add(this.label57);
+            this.Controls.Add(this.label58);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.currentCashProfile);
             this.Controls.Add(this.label49);
@@ -1394,6 +1480,14 @@
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label currentCashProfile;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label54;
     }
 }
 
