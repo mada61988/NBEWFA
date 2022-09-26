@@ -128,11 +128,9 @@
             this.label45 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.selectedCashProfile = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.currentCashProfile = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label53 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
@@ -140,6 +138,31 @@
             this.label50 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
+            this.camerHDDExistsFalseCheck = new System.Windows.Forms.Label();
+            this.camerHDDExistsTrueCheck = new System.Windows.Forms.Label();
+            this.cameraHDDLetterText = new System.Windows.Forms.Label();
+            this.cameraHDDDriveLetterTrueCheck = new System.Windows.Forms.Label();
+            this.cameraHDDDriveLetterFalseCheck = new System.Windows.Forms.Label();
+            this.cameraHDDDriveLetterFixButton = new System.Windows.Forms.Button();
+            this.bitmapsFolderItemsText = new System.Windows.Forms.Label();
+            this.bitmapsNumberOfItemsFalseCheck = new System.Windows.Forms.Label();
+            this.bitmapsNumberOfItemsTrueCheck = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.audioFolderItmes = new System.Windows.Forms.Label();
+            this.audioNumberOfFilesTrueCheck = new System.Windows.Forms.Label();
+            this.audioNumberOfFilesFalseCheck = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -269,7 +292,7 @@
             // 
             this.defaultGatewayFourthBox.Location = new System.Drawing.Point(185, 164);
             this.defaultGatewayFourthBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.defaultGatewayFourthBox.MaxLength = 1;
+            this.defaultGatewayFourthBox.MaxLength = 3;
             this.defaultGatewayFourthBox.Name = "defaultGatewayFourthBox";
             this.defaultGatewayFourthBox.Size = new System.Drawing.Size(25, 20);
             this.defaultGatewayFourthBox.TabIndex = 36;
@@ -1013,9 +1036,9 @@
             this.label47.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label47.Location = new System.Drawing.Point(304, 160);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(85, 13);
+            this.label47.Size = new System.Drawing.Size(82, 13);
             this.label47.TabIndex = 116;
-            this.label47.Text = "Denominatioin";
+            this.label47.Text = "Denomination";
             // 
             // label48
             // 
@@ -1119,28 +1142,20 @@
             // label46
             // 
             this.label46.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label46.Location = new System.Drawing.Point(400, 102);
+            this.label46.Location = new System.Drawing.Point(300, 102);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(200, 2);
+            this.label46.Size = new System.Drawing.Size(300, 2);
             this.label46.TabIndex = 127;
             // 
             // selectedCashProfile
             // 
             this.selectedCashProfile.AutoSize = true;
-            this.selectedCashProfile.Location = new System.Drawing.Point(349, 99);
+            this.selectedCashProfile.Location = new System.Drawing.Point(339, 91);
             this.selectedCashProfile.Name = "selectedCashProfile";
             this.selectedCashProfile.Size = new System.Drawing.Size(38, 13);
             this.selectedCashProfile.TabIndex = 129;
             this.selectedCashProfile.Text = "AMCR";
             this.selectedCashProfile.Click += new System.EventHandler(this.selectedCashProfile_Click);
-            // 
-            // label51
-            // 
-            this.label51.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label51.Location = new System.Drawing.Point(300, 103);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(30, 2);
-            this.label51.TabIndex = 130;
             // 
             // label49
             // 
@@ -1166,7 +1181,7 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(580, 105);
+            this.button1.Location = new System.Drawing.Point(576, 104);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(20, 15);
@@ -1175,28 +1190,20 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label53
-            // 
-            this.label53.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label53.Location = new System.Drawing.Point(305, 325);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(30, 2);
-            this.label53.TabIndex = 155;
-            // 
             // label55
             // 
             this.label55.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label55.Location = new System.Drawing.Point(405, 324);
+            this.label55.Location = new System.Drawing.Point(305, 326);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(200, 2);
+            this.label55.Size = new System.Drawing.Size(210, 2);
             this.label55.TabIndex = 153;
             // 
             // label56
             // 
             this.label56.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label56.Location = new System.Drawing.Point(604, 326);
+            this.label56.Location = new System.Drawing.Point(515, 326);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(2, 120);
+            this.label56.Size = new System.Drawing.Size(2, 140);
             this.label56.TabIndex = 152;
             this.label56.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
@@ -1205,16 +1212,16 @@
             this.label57.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.label57.Location = new System.Drawing.Point(305, 326);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(2, 120);
+            this.label57.Size = new System.Drawing.Size(2, 140);
             this.label57.TabIndex = 151;
             this.label57.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // label58
             // 
             this.label58.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label58.Location = new System.Drawing.Point(305, 444);
+            this.label58.Location = new System.Drawing.Point(305, 466);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(300, 2);
+            this.label58.Size = new System.Drawing.Size(210, 2);
             this.label58.TabIndex = 150;
             // 
             // label50
@@ -1223,9 +1230,9 @@
             this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.Location = new System.Drawing.Point(400, 271);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(112, 17);
+            this.label50.Size = new System.Drawing.Size(97, 17);
             this.label50.TabIndex = 156;
-            this.label50.Text = "Additional Info";
+            this.label50.Text = "CHECK LIST";
             // 
             // label52
             // 
@@ -1239,11 +1246,283 @@
             // label54
             // 
             this.label54.AutoSize = true;
+            this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label54.Location = new System.Drawing.Point(322, 342);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(70, 13);
+            this.label54.Size = new System.Drawing.Size(89, 12);
             this.label54.TabIndex = 158;
-            this.label54.Text = "Camera HDD";
+            this.label54.Text = "Camera HDD Exists";
+            this.label54.Click += new System.EventHandler(this.label54_Click);
+            // 
+            // camerHDDExistsFalseCheck
+            // 
+            this.camerHDDExistsFalseCheck.AutoSize = true;
+            this.camerHDDExistsFalseCheck.BackColor = System.Drawing.Color.Red;
+            this.camerHDDExistsFalseCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.camerHDDExistsFalseCheck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.camerHDDExistsFalseCheck.Location = new System.Drawing.Point(446, 341);
+            this.camerHDDExistsFalseCheck.Name = "camerHDDExistsFalseCheck";
+            this.camerHDDExistsFalseCheck.Size = new System.Drawing.Size(16, 15);
+            this.camerHDDExistsFalseCheck.TabIndex = 159;
+            this.camerHDDExistsFalseCheck.Text = "X";
+            // 
+            // camerHDDExistsTrueCheck
+            // 
+            this.camerHDDExistsTrueCheck.AutoSize = true;
+            this.camerHDDExistsTrueCheck.BackColor = System.Drawing.Color.SeaGreen;
+            this.camerHDDExistsTrueCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.camerHDDExistsTrueCheck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.camerHDDExistsTrueCheck.Location = new System.Drawing.Point(447, 342);
+            this.camerHDDExistsTrueCheck.Name = "camerHDDExistsTrueCheck";
+            this.camerHDDExistsTrueCheck.Size = new System.Drawing.Size(11, 12);
+            this.camerHDDExistsTrueCheck.TabIndex = 160;
+            this.camerHDDExistsTrueCheck.Text = "L";
+            // 
+            // cameraHDDLetterText
+            // 
+            this.cameraHDDLetterText.AutoSize = true;
+            this.cameraHDDLetterText.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraHDDLetterText.Location = new System.Drawing.Point(322, 368);
+            this.cameraHDDLetterText.Name = "cameraHDDLetterText";
+            this.cameraHDDLetterText.Size = new System.Drawing.Size(101, 12);
+            this.cameraHDDLetterText.TabIndex = 161;
+            this.cameraHDDLetterText.Text = "Camera HDD Letter F:\\";
+            // 
+            // cameraHDDDriveLetterTrueCheck
+            // 
+            this.cameraHDDDriveLetterTrueCheck.AutoSize = true;
+            this.cameraHDDDriveLetterTrueCheck.BackColor = System.Drawing.Color.SeaGreen;
+            this.cameraHDDDriveLetterTrueCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraHDDDriveLetterTrueCheck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.cameraHDDDriveLetterTrueCheck.Location = new System.Drawing.Point(447, 368);
+            this.cameraHDDDriveLetterTrueCheck.Name = "cameraHDDDriveLetterTrueCheck";
+            this.cameraHDDDriveLetterTrueCheck.Size = new System.Drawing.Size(11, 12);
+            this.cameraHDDDriveLetterTrueCheck.TabIndex = 162;
+            this.cameraHDDDriveLetterTrueCheck.Text = "L";
+            // 
+            // cameraHDDDriveLetterFalseCheck
+            // 
+            this.cameraHDDDriveLetterFalseCheck.AutoSize = true;
+            this.cameraHDDDriveLetterFalseCheck.BackColor = System.Drawing.Color.Red;
+            this.cameraHDDDriveLetterFalseCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraHDDDriveLetterFalseCheck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.cameraHDDDriveLetterFalseCheck.Location = new System.Drawing.Point(447, 368);
+            this.cameraHDDDriveLetterFalseCheck.Name = "cameraHDDDriveLetterFalseCheck";
+            this.cameraHDDDriveLetterFalseCheck.Size = new System.Drawing.Size(16, 15);
+            this.cameraHDDDriveLetterFalseCheck.TabIndex = 163;
+            this.cameraHDDDriveLetterFalseCheck.Text = "X";
+            // 
+            // cameraHDDDriveLetterFixButton
+            // 
+            this.cameraHDDDriveLetterFixButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.cameraHDDDriveLetterFixButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cameraHDDDriveLetterFixButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.cameraHDDDriveLetterFixButton.Location = new System.Drawing.Point(481, 364);
+            this.cameraHDDDriveLetterFixButton.Margin = new System.Windows.Forms.Padding(0);
+            this.cameraHDDDriveLetterFixButton.Name = "cameraHDDDriveLetterFixButton";
+            this.cameraHDDDriveLetterFixButton.Size = new System.Drawing.Size(31, 20);
+            this.cameraHDDDriveLetterFixButton.TabIndex = 165;
+            this.cameraHDDDriveLetterFixButton.Text = "Fix";
+            this.cameraHDDDriveLetterFixButton.UseVisualStyleBackColor = false;
+            this.cameraHDDDriveLetterFixButton.Click += new System.EventHandler(this.cameraHDDDriveLetterFixButton_Click);
+            // 
+            // bitmapsFolderItemsText
+            // 
+            this.bitmapsFolderItemsText.AutoSize = true;
+            this.bitmapsFolderItemsText.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bitmapsFolderItemsText.Location = new System.Drawing.Point(322, 395);
+            this.bitmapsFolderItemsText.Name = "bitmapsFolderItemsText";
+            this.bitmapsFolderItemsText.Size = new System.Drawing.Size(93, 12);
+            this.bitmapsFolderItemsText.TabIndex = 166;
+            this.bitmapsFolderItemsText.Text = "Bitmaps Folder Items";
+            this.bitmapsFolderItemsText.Click += new System.EventHandler(this.bitmapsFolderItemsText_Click);
+            // 
+            // bitmapsNumberOfItemsFalseCheck
+            // 
+            this.bitmapsNumberOfItemsFalseCheck.AutoSize = true;
+            this.bitmapsNumberOfItemsFalseCheck.BackColor = System.Drawing.Color.Red;
+            this.bitmapsNumberOfItemsFalseCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bitmapsNumberOfItemsFalseCheck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bitmapsNumberOfItemsFalseCheck.Location = new System.Drawing.Point(447, 391);
+            this.bitmapsNumberOfItemsFalseCheck.Name = "bitmapsNumberOfItemsFalseCheck";
+            this.bitmapsNumberOfItemsFalseCheck.Size = new System.Drawing.Size(16, 15);
+            this.bitmapsNumberOfItemsFalseCheck.TabIndex = 167;
+            this.bitmapsNumberOfItemsFalseCheck.Text = "X";
+            // 
+            // bitmapsNumberOfItemsTrueCheck
+            // 
+            this.bitmapsNumberOfItemsTrueCheck.AutoSize = true;
+            this.bitmapsNumberOfItemsTrueCheck.BackColor = System.Drawing.Color.SeaGreen;
+            this.bitmapsNumberOfItemsTrueCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bitmapsNumberOfItemsTrueCheck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bitmapsNumberOfItemsTrueCheck.Location = new System.Drawing.Point(447, 394);
+            this.bitmapsNumberOfItemsTrueCheck.Name = "bitmapsNumberOfItemsTrueCheck";
+            this.bitmapsNumberOfItemsTrueCheck.Size = new System.Drawing.Size(11, 12);
+            this.bitmapsNumberOfItemsTrueCheck.TabIndex = 168;
+            this.bitmapsNumberOfItemsTrueCheck.Text = "L";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(328, 321);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(112, 13);
+            this.label59.TabIndex = 169;
+            this.label59.Text = "CONFIG CHECK LIST";
+            // 
+            // label51
+            // 
+            this.label51.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label51.Location = new System.Drawing.Point(532, 328);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(2, 140);
+            this.label51.TabIndex = 170;
+            this.label51.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // label53
+            // 
+            this.label53.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label53.Location = new System.Drawing.Point(533, 327);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(80, 2);
+            this.label53.TabIndex = 171;
+            // 
+            // label60
+            // 
+            this.label60.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label60.Location = new System.Drawing.Point(613, 328);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(2, 140);
+            this.label60.TabIndex = 172;
+            this.label60.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // label61
+            // 
+            this.label61.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label61.Location = new System.Drawing.Point(533, 466);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(80, 2);
+            this.label61.TabIndex = 173;
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(540, 321);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(43, 13);
+            this.label62.TabIndex = 174;
+            this.label62.Text = "FOREX";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button2.Location = new System.Drawing.Point(536, 420);
+            this.button2.Margin = new System.Windows.Forms.Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(72, 44);
+            this.button2.TabIndex = 175;
+            this.button2.Text = "IMPORT ConfigData.XML";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(535, 401);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(76, 14);
+            this.checkBox1.TabIndex = 176;
+            this.checkBox1.Text = "Yes, Forex used";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckStateChanged += new System.EventHandler(this.checkBox1_CheckStateChanged);
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.Location = new System.Drawing.Point(540, 334);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(67, 12);
+            this.label63.TabIndex = 177;
+            this.label63.Text = "Use this button";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label65.Location = new System.Drawing.Point(554, 350);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(33, 12);
+            this.label65.TabIndex = 179;
+            this.label65.Text = "ONLY";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label66.Location = new System.Drawing.Point(540, 365);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(0, 12);
+            this.label66.TabIndex = 180;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label67.Location = new System.Drawing.Point(534, 365);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(76, 12);
+            this.label67.TabIndex = 181;
+            this.label67.Text = "if this SST is on a ";
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.Location = new System.Drawing.Point(541, 380);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(55, 12);
+            this.label68.TabIndex = 182;
+            this.label68.Text = "forex server";
+            // 
+            // audioFolderItmes
+            // 
+            this.audioFolderItmes.AutoSize = true;
+            this.audioFolderItmes.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.audioFolderItmes.Location = new System.Drawing.Point(322, 421);
+            this.audioFolderItmes.Name = "audioFolderItmes";
+            this.audioFolderItmes.Size = new System.Drawing.Size(83, 12);
+            this.audioFolderItmes.TabIndex = 184;
+            this.audioFolderItmes.Text = "Audio Folder Items";
+            // 
+            // audioNumberOfFilesTrueCheck
+            // 
+            this.audioNumberOfFilesTrueCheck.AutoSize = true;
+            this.audioNumberOfFilesTrueCheck.BackColor = System.Drawing.Color.SeaGreen;
+            this.audioNumberOfFilesTrueCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.audioNumberOfFilesTrueCheck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.audioNumberOfFilesTrueCheck.Location = new System.Drawing.Point(448, 420);
+            this.audioNumberOfFilesTrueCheck.Name = "audioNumberOfFilesTrueCheck";
+            this.audioNumberOfFilesTrueCheck.Size = new System.Drawing.Size(11, 12);
+            this.audioNumberOfFilesTrueCheck.TabIndex = 186;
+            this.audioNumberOfFilesTrueCheck.Text = "L";
+            this.audioNumberOfFilesTrueCheck.Click += new System.EventHandler(this.audioNumberOfFilesTrueCheck_Click);
+            // 
+            // audioNumberOfFilesFalseCheck
+            // 
+            this.audioNumberOfFilesFalseCheck.AutoSize = true;
+            this.audioNumberOfFilesFalseCheck.BackColor = System.Drawing.Color.Red;
+            this.audioNumberOfFilesFalseCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.audioNumberOfFilesFalseCheck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.audioNumberOfFilesFalseCheck.Location = new System.Drawing.Point(447, 418);
+            this.audioNumberOfFilesFalseCheck.Name = "audioNumberOfFilesFalseCheck";
+            this.audioNumberOfFilesFalseCheck.Size = new System.Drawing.Size(16, 15);
+            this.audioNumberOfFilesFalseCheck.TabIndex = 185;
+            this.audioNumberOfFilesFalseCheck.Text = "X";
             // 
             // Form1
             // 
@@ -1253,10 +1532,34 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(622, 531);
+            this.Controls.Add(this.audioNumberOfFilesTrueCheck);
+            this.Controls.Add(this.audioNumberOfFilesFalseCheck);
+            this.Controls.Add(this.audioFolderItmes);
+            this.Controls.Add(this.label68);
+            this.Controls.Add(this.label67);
+            this.Controls.Add(this.label66);
+            this.Controls.Add(this.label65);
+            this.Controls.Add(this.label63);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label62);
+            this.Controls.Add(this.label61);
+            this.Controls.Add(this.label60);
+            this.Controls.Add(this.label53);
+            this.Controls.Add(this.label51);
+            this.Controls.Add(this.label59);
+            this.Controls.Add(this.bitmapsNumberOfItemsTrueCheck);
+            this.Controls.Add(this.bitmapsNumberOfItemsFalseCheck);
+            this.Controls.Add(this.bitmapsFolderItemsText);
+            this.Controls.Add(this.cameraHDDDriveLetterFixButton);
+            this.Controls.Add(this.cameraHDDDriveLetterFalseCheck);
+            this.Controls.Add(this.cameraHDDDriveLetterTrueCheck);
+            this.Controls.Add(this.cameraHDDLetterText);
+            this.Controls.Add(this.camerHDDExistsTrueCheck);
+            this.Controls.Add(this.camerHDDExistsFalseCheck);
             this.Controls.Add(this.label54);
             this.Controls.Add(this.label52);
             this.Controls.Add(this.label50);
-            this.Controls.Add(this.label53);
             this.Controls.Add(this.label55);
             this.Controls.Add(this.label56);
             this.Controls.Add(this.label57);
@@ -1264,7 +1567,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.currentCashProfile);
             this.Controls.Add(this.label49);
-            this.Controls.Add(this.label51);
             this.Controls.Add(this.selectedCashProfile);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.label45);
@@ -1476,11 +1778,9 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label selectedCashProfile;
-        private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label currentCashProfile;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.Label label57;
@@ -1488,6 +1788,31 @@
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label camerHDDExistsFalseCheck;
+        private System.Windows.Forms.Label camerHDDExistsTrueCheck;
+        private System.Windows.Forms.Label cameraHDDLetterText;
+        private System.Windows.Forms.Label cameraHDDDriveLetterTrueCheck;
+        private System.Windows.Forms.Label cameraHDDDriveLetterFalseCheck;
+        private System.Windows.Forms.Button cameraHDDDriveLetterFixButton;
+        private System.Windows.Forms.Label bitmapsFolderItemsText;
+        private System.Windows.Forms.Label bitmapsNumberOfItemsFalseCheck;
+        private System.Windows.Forms.Label bitmapsNumberOfItemsTrueCheck;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label audioFolderItmes;
+        private System.Windows.Forms.Label audioNumberOfFilesTrueCheck;
+        private System.Windows.Forms.Label audioNumberOfFilesFalseCheck;
     }
 }
 

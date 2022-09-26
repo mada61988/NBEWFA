@@ -1,4 +1,19 @@
-﻿using System;
+﻿/***********************************************************************/
+/* Developer: Mohamed Ayman Shokry */
+/* Number   :     01129805828      */
+/*    Date  :       14.9.2022      */
+/*    Bank  : NationalBankOfEgypt  */
+/*  Version :         04           */
+/***********************************************************************/
+
+/********************** VERSION-04 ******************************/
+/*  Fixes    :   * ComputerName entery box is not having the same value of TerminalID box.
+                 * Gateway Third Box value has only one integer, it is updated to 3 integers. 
+                 * Currency Box in Cashprofiles section was not dynamic, now it's changing with the current value in registry.
+                 * Message Box Which appeared when importing is updated, displaying the imported data only.
+/***********************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +22,8 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.IO;
 
 namespace NBEWindowsFormApplication
 {
@@ -36,6 +53,8 @@ namespace NBEWindowsFormApplication
         string[] oldForex = { "5", "10", "50", "200" };
         string[] cash = { "20", "50", "100", "200" };
         string regkeyPath = "";
+        string probaseRegkeyPath = "";
+        
         public Form1()
         {
             InitializeComponent();
@@ -56,6 +75,7 @@ namespace NBEWindowsFormApplication
         private void Form1_Load(object sender, EventArgs e)
         {
             importBtn.Enabled = false;
+            button2.Enabled = false;
             ipv4Success.Visible = false;
             ipv4FalseLogo.Visible = false;
             defaultGatewayFalseLogo.Visible = false;
@@ -75,19 +95,66 @@ namespace NBEWindowsFormApplication
             currency2Value.Text = "EGP";
             currency3Value.Text = "EGP";
             currency4Value.Text = "EGP";
+            int bitmapsNumberOfItems = Directory.GetFiles(@"C:\ProTopas\BITMAPS", "*", SearchOption.TopDirectoryOnly).Length;
+            bitmapsFolderItemsText.Text = $"Bitmaps Folder Items {bitmapsNumberOfItems+1}";
+            bitmapsNumberOfItemsTrueCheck.Visible = bitmapsNumberOfItems == 579 ? true : false;
+            bitmapsNumberOfItemsFalseCheck.Visible = bitmapsNumberOfItems == 579 ? false : true;
+            bitmapsNumberOfItemsTrueCheck.Text = "\u2714";
+            int audioNumberOfFiles = Directory.GetFiles(@"C:\Audio", "*", SearchOption.TopDirectoryOnly).Length;
+            audioFolderItmes.Text = $"Audio Folder Items {audioNumberOfFiles}";
+           audioNumberOfFilesTrueCheck.Visible = audioNumberOfFiles == 17 ? true : false;
+            audioNumberOfFilesFalseCheck.Visible = audioNumberOfFiles == 17 ? false : true;
+            audioNumberOfFilesTrueCheck.Text = "\u2714";
+            publicClass2.getHDDData();
+            
+            
+           // label54.ForeColor = System.Drawing.Color.Red;
+            camerHDDExistsTrueCheck.Text = "\u2714";
+            camerHDDExistsFalseCheck.Visible= publicClass2.socondDriveFlag?false:true;
+            camerHDDExistsTrueCheck.Visible = publicClass2.socondDriveFlag ? true : false;
+            cameraHDDDriveLetterTrueCheck.Text = "\u2714";
+            if (publicClass2.socondDriveFlag)
+            {
+                cameraHDDLetterText.Text = $"Camera HDD Letter {publicClass2.secondDriveCollectedLetters[0]}";
+                cameraHDDDriveLetterFalseCheck.Visible = publicClass2.secondDriveCollectedLetters[0] == "F:" ? false : true;
+                cameraHDDDriveLetterTrueCheck.Visible = publicClass2.secondDriveCollectedLetters[0] == "F:" ? true : false;
+                cameraHDDDriveLetterFixButton.Visible = cameraHDDDriveLetterFalseCheck.Visible == true ? true : false;
+                    }
+            else {
+                cameraHDDDriveLetterFalseCheck.Visible = false; 
+                cameraHDDDriveLetterTrueCheck.Visible = false;
+                cameraHDDLetterText.Visible = false;
+                cameraHDDDriveLetterFixButton.Visible = false;
+            }
+            
+            
+            
+            
+            
+            
             string[] cashTypes = { };
             bool validator = false;
             var key1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wincor Nixdorf", true);
             var key2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Wincor Nixdorf", true);
+          
+            
+            
+            
+            
+            
+            
+            
             regkeyPath = @"SOFTWARE\Wincor Nixdorf";
             if (key1 != null)
             {
                 regkeyPath = "SOFTWARE\\Wincor Nixdorf";
+                probaseRegkeyPath = "SOFTWARE\\WOW6432Node\\Diebold Nixdorf\\ProBase";
                 validator = true;
             }
-            if (key2 != null)
+           if (key2 != null)
             {
                 regkeyPath = @"SOFTWARE\WOW6432Node\Wincor Nixdorf";
+                probaseRegkeyPath = "SOFTWARE\\WOW6432Node\\Diebold Nixdorf\\ProBase";
                 validator = true;
             }
 
@@ -110,8 +177,14 @@ namespace NBEWindowsFormApplication
                 selectedCashProfile.Text = currentCashProfileName;
                 currentCashProfile.Text = currentCashProfileName;
                 
-                MessageBox.Show(currentCashProfileName);
+                //.Show(currentCashProfileName);
             }
+            publicClass2.getIpAddress();
+            publicClass2.getCurrentInfoFromRegistry(regkeyPath);
+            publicClass2.getsubnetMask();
+            publicClass2.getDefaultGateway();
+            publicClass2.getSerialNumber(probaseRegkeyPath);
+            publicClass2.getSystemName(probaseRegkeyPath);
 
         }
 
@@ -148,24 +221,33 @@ namespace NBEWindowsFormApplication
 
         private void ipv4ThirdBox_TextChanged(object sender, EventArgs e)
         {
-           
-            defaultGatewayThirdBox.Text = ipv4ThirdBox.Text;
+
+
+            defaultGatewayFirstBox.Text = ipv4FirstBox.Text;
             int outputValue = 0;
-            int ipv4FirstBoxValue = int.TryParse(ipv4FirstBox.Text, out outputValue) ? int.Parse(ipv4FirstBox.Text) : -1;
-            int ipv4SocondBoxValue = int.TryParse(ipv4SocondBox.Text, out outputValue) ? int.Parse(ipv4SocondBox.Text) : -1;
-            int ipv4ThirdBoxValue = int.TryParse(ipv4ThirdBox.Text, out outputValue) ? int.Parse(ipv4ThirdBox.Text) : -1;
-            int ipv4FourthBoxValue = int.TryParse(ipv4FourthBox.Text, out outputValue) ? int.Parse(ipv4FourthBox.Text) : -1;
-            if (ipv4FirstBoxValue != -1 && ipv4SocondBoxValue != -1 && ipv4ThirdBoxValue != -1 && ipv4FourthBoxValue != -1)
+            /*
+               int ipv4FirstBoxValue = int.TryParse(ipv4FirstBox.Text, out outputValue) ? int.Parse(ipv4FirstBox.Text) : -1;
+              int ipv4SocondBoxValue = int.TryParse(ipv4SocondBox.Text, out outputValue) ? int.Parse(ipv4SocondBox.Text) : -1;
+              int ipv4ThirdBoxValue = int.TryParse(ipv4ThirdBox.Text, out outputValue) ? int.Parse(ipv4ThirdBox.Text) : -1;
+              int ipv4FourthBoxValue = int.TryParse(ipv4FourthBox.Text, out outputValue) ? int.Parse(ipv4FourthBox.Text) : -1;
+
+              */
+            string ipv4FirstBoxValue = ipv4FirstBox.Text;
+            string ipv4SocondBoxValue = ipv4SocondBox.Text;
+            string ipv4ThirdBoxValue = ipv4ThirdBox.Text;
+            string ipv4FourthBoxValue = ipv4FourthBox.Text;
+
+            if (ipv4FirstBoxValue != "" && ipv4SocondBoxValue != "" && ipv4ThirdBoxValue != "" && ipv4FourthBoxValue != "")
             {
                 // importBtn.Enabled = true;
                 ipv4Check = true;
-
                 //importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
                 if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
                 {
                     importBtn.Enabled = true;
                 }
-                else {
+                else
+                {
                     importBtn.Enabled = false;
                 }
                 ipv4Success.Visible = true;
@@ -175,7 +257,7 @@ namespace NBEWindowsFormApplication
             {
                 // importBtn.Enabled = false;
                 ipv4Check = false;
-                //importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
+                // importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
                 if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
                 {
                     importBtn.Enabled = true;
@@ -187,11 +269,12 @@ namespace NBEWindowsFormApplication
                 ipv4Success.Visible = false;
                 ipv4FalseLogo.Visible = true;
             }
-            if (ipv4FirstBoxValue == -1 && ipv4SocondBoxValue == -1 && ipv4ThirdBoxValue == -1 && ipv4FourthBoxValue == -1)
+            if (ipv4FirstBoxValue == "" && ipv4SocondBoxValue == "" && ipv4ThirdBoxValue == "" && ipv4FourthBoxValue == "")
             {
                 ipv4Success.Visible = false;
                 ipv4FalseLogo.Visible = false;
             }
+
             if (ipv4Check)
             {
                 defaultGatewayFourthBox.ReadOnly = false;
@@ -220,17 +303,27 @@ namespace NBEWindowsFormApplication
 
         private void ipv4FourthBox_TextChanged(object sender, EventArgs e)
         {
-           
+
+
+            defaultGatewayFirstBox.Text = ipv4FirstBox.Text;
             int outputValue = 0;
-            int ipv4FirstBoxValue = int.TryParse(ipv4FirstBox.Text, out outputValue) ? int.Parse(ipv4FirstBox.Text) : -1;
-            int ipv4SocondBoxValue = int.TryParse(ipv4SocondBox.Text, out outputValue) ? int.Parse(ipv4SocondBox.Text) : -1;
-            int ipv4ThirdBoxValue = int.TryParse(ipv4ThirdBox.Text, out outputValue) ? int.Parse(ipv4ThirdBox.Text) : -1;
-            int ipv4FourthBoxValue = int.TryParse(ipv4FourthBox.Text, out outputValue) ? int.Parse(ipv4FourthBox.Text) : -1;
-            if (ipv4FirstBoxValue != -1 && ipv4SocondBoxValue != -1 && ipv4ThirdBoxValue != -1 && ipv4FourthBoxValue != -1)
+            /*
+               int ipv4FirstBoxValue = int.TryParse(ipv4FirstBox.Text, out outputValue) ? int.Parse(ipv4FirstBox.Text) : -1;
+              int ipv4SocondBoxValue = int.TryParse(ipv4SocondBox.Text, out outputValue) ? int.Parse(ipv4SocondBox.Text) : -1;
+              int ipv4ThirdBoxValue = int.TryParse(ipv4ThirdBox.Text, out outputValue) ? int.Parse(ipv4ThirdBox.Text) : -1;
+              int ipv4FourthBoxValue = int.TryParse(ipv4FourthBox.Text, out outputValue) ? int.Parse(ipv4FourthBox.Text) : -1;
+
+              */
+            string ipv4FirstBoxValue = ipv4FirstBox.Text;
+            string ipv4SocondBoxValue = ipv4SocondBox.Text;
+            string ipv4ThirdBoxValue = ipv4ThirdBox.Text;
+            string ipv4FourthBoxValue = ipv4FourthBox.Text;
+
+            if (ipv4FirstBoxValue != "" && ipv4SocondBoxValue != "" && ipv4ThirdBoxValue != "" && ipv4FourthBoxValue != "")
             {
                 // importBtn.Enabled = true;
                 ipv4Check = true;
-                //  importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
+                //importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
                 if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
                 {
                     importBtn.Enabled = true;
@@ -258,10 +351,12 @@ namespace NBEWindowsFormApplication
                 ipv4Success.Visible = false;
                 ipv4FalseLogo.Visible = true;
             }
-            if (ipv4FirstBoxValue == -1 && ipv4SocondBoxValue == -1 && ipv4ThirdBoxValue == -1 && ipv4FourthBoxValue == -1) {
+            if (ipv4FirstBoxValue == "" && ipv4SocondBoxValue == "" && ipv4ThirdBoxValue == "" && ipv4FourthBoxValue == "")
+            {
                 ipv4Success.Visible = false;
                 ipv4FalseLogo.Visible = false;
             }
+
             if (ipv4Check)
             {
                 defaultGatewayFourthBox.ReadOnly = false;
@@ -578,10 +673,23 @@ namespace NBEWindowsFormApplication
 
         private void terminalIdFirstBox_TextChanged(object sender, EventArgs e)
         {
+            /*
+             string computerNameFirstBoxValue = computerNameFirstBox.Text;
+            string computerNameSocondBoxValue = computerNameSocondBox.Text;
+            if (computerNameFirstBoxValue != "" && computerNameSocondBoxValue != "" && computerNameFirstBoxValue.Length ==3 && computerNameSocondBoxValue.Length==8)
+           
+            */
             computerNameFirstBox.Text = terminalIdFirstBox.Text;
-            int terminalIdFirstBoxValue = int.TryParse(terminalIdFirstBox.Text, out outputValue) ? int.Parse(terminalIdFirstBox.Text) : -1;
-            int terminalIdSocondBoxValue = int.TryParse(terminalIdSocondBox.Text, out outputValue) ? int.Parse(terminalIdSocondBox.Text) : -1;
-            if (terminalIdFirstBoxValue != -1 && terminalIdSocondBoxValue != -1 && terminalIdFirstBoxValue.ToString().Length == 3 && terminalIdSocondBoxValue.ToString().Length == 8)
+          //  int terminalIdFirstBoxValue = int.TryParse(terminalIdFirstBox.Text, out outputValue) ? int.Parse(terminalIdFirstBox.Text) : -1;
+           // int terminalIdSocondBoxValue = int.TryParse(terminalIdSocondBox.Text, out outputValue) ? int.Parse(terminalIdSocondBox.Text) : -1;
+            
+            string terminalIdFirstBoxValue = terminalIdFirstBox.Text;
+            string terminalIdSocondBoxValue = terminalIdSocondBox.Text;
+
+            //  if (terminalIdFirstBoxValue != -1 && terminalIdSocondBoxValue != -1 && terminalIdFirstBoxValue.ToString().Length == 3 && terminalIdSocondBoxValue.ToString().Length == 8)
+
+            if (terminalIdFirstBoxValue != "" && terminalIdSocondBoxValue != "" && terminalIdFirstBoxValue.ToString().Length == 3 && terminalIdSocondBoxValue.ToString().Length == 8)
+
             {
                 terminalIdCheck = true;
                 //  importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
@@ -612,7 +720,7 @@ namespace NBEWindowsFormApplication
                 terminalIdSuccessLogo.Visible = false;
                 terminalIdFalseLogo.Visible = true;
             }
-            if (terminalIdFirstBoxValue == -1 && terminalIdSocondBoxValue == -1) {
+            if (terminalIdFirstBoxValue == "" && terminalIdSocondBoxValue == "") {
                 terminalIdSuccessLogo.Visible = false;
                 terminalIdFalseLogo.Visible = false;
             }
@@ -620,13 +728,28 @@ namespace NBEWindowsFormApplication
 
         private void terminalIdSocondBox_TextChanged(object sender, EventArgs e)
         {
+            /*
+             string computerNameFirstBoxValue = computerNameFirstBox.Text;
+            string computerNameSocondBoxValue = computerNameSocondBox.Text;
+            if (computerNameFirstBoxValue != "" && computerNameSocondBoxValue != "" && computerNameFirstBoxValue.Length ==3 && computerNameSocondBoxValue.Length==8)
+           
+            */
+            computerNameFirstBox.Text = terminalIdFirstBox.Text;
             computerNameSocondBox.Text = terminalIdSocondBox.Text;
-            int terminalIdFirstBoxValue = int.TryParse(terminalIdFirstBox.Text, out outputValue) ? int.Parse(terminalIdFirstBox.Text) : -1;
-            int terminalIdSocondBoxValue = int.TryParse(terminalIdSocondBox.Text, out outputValue) ? int.Parse(terminalIdSocondBox.Text) : -1;
-            if (terminalIdFirstBoxValue != -1 && terminalIdSocondBoxValue != -1 && terminalIdFirstBoxValue.ToString().Length == 3 && terminalIdSocondBoxValue.ToString().Length == 8)
+
+            //  int terminalIdFirstBoxValue = int.TryParse(terminalIdFirstBox.Text, out outputValue) ? int.Parse(terminalIdFirstBox.Text) : -1;
+            // int terminalIdSocondBoxValue = int.TryParse(terminalIdSocondBox.Text, out outputValue) ? int.Parse(terminalIdSocondBox.Text) : -1;
+
+            string terminalIdFirstBoxValue = terminalIdFirstBox.Text;
+            string terminalIdSocondBoxValue = terminalIdSocondBox.Text;
+
+            //  if (terminalIdFirstBoxValue != -1 && terminalIdSocondBoxValue != -1 && terminalIdFirstBoxValue.ToString().Length == 3 && terminalIdSocondBoxValue.ToString().Length == 8)
+
+            if (terminalIdFirstBoxValue != "" && terminalIdSocondBoxValue != "" && terminalIdFirstBoxValue.ToString().Length == 3 && terminalIdSocondBoxValue.ToString().Length == 8)
+
             {
                 terminalIdCheck = true;
-                // importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck, remotePeerCheck);
+                //  importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
                 if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
                 {
                     importBtn.Enabled = true;
@@ -642,7 +765,7 @@ namespace NBEWindowsFormApplication
             else
             {
                 terminalIdCheck = false;
-                //  importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck, remotePeerCheck);
+                //  importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
                 if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
                 {
                     importBtn.Enabled = true;
@@ -654,7 +777,7 @@ namespace NBEWindowsFormApplication
                 terminalIdSuccessLogo.Visible = false;
                 terminalIdFalseLogo.Visible = true;
             }
-            if (terminalIdFirstBoxValue == -1 && terminalIdSocondBoxValue == -1)
+            if (terminalIdFirstBoxValue == "" && terminalIdSocondBoxValue == "")
             {
                 terminalIdSuccessLogo.Visible = false;
                 terminalIdFalseLogo.Visible = false;
@@ -738,10 +861,20 @@ namespace NBEWindowsFormApplication
             
             defaultGatewayFirstBox.Text = ipv4FirstBox.Text;
             int outputValue = 0;
-            int ipv4FirstBoxValue = int.TryParse(ipv4FirstBox.Text, out outputValue) ? int.Parse(ipv4FirstBox.Text) : -1;
-            int ipv4SocondBoxValue = int.TryParse(ipv4SocondBox.Text, out outputValue) ? int.Parse(ipv4SocondBox.Text) : -1;
-            int ipv4ThirdBoxValue = int.TryParse(ipv4ThirdBox.Text, out outputValue) ? int.Parse(ipv4ThirdBox.Text) : -1;
-            int ipv4FourthBoxValue = int.TryParse(ipv4FourthBox.Text, out outputValue) ? int.Parse(ipv4FourthBox.Text) : -1;
+           
+               int ipv4FirstBoxValue = int.TryParse(ipv4FirstBox.Text, out outputValue) ? int.Parse(ipv4FirstBox.Text) : -1;
+              int ipv4SocondBoxValue = int.TryParse(ipv4SocondBox.Text, out outputValue) ? int.Parse(ipv4SocondBox.Text) : -1;
+              int ipv4ThirdBoxValue = int.TryParse(ipv4ThirdBox.Text, out outputValue) ? int.Parse(ipv4ThirdBox.Text) : -1;
+              int ipv4FourthBoxValue = int.TryParse(ipv4FourthBox.Text, out outputValue) ? int.Parse(ipv4FourthBox.Text) : -1;
+
+          
+          
+            /*
+            string ipv4FirstBoxValue = ipv4FirstBox.Text;
+            string ipv4SocondBoxValue = ipv4SocondBox.Text;
+            string ipv4ThirdBoxValue = ipv4ThirdBox.Text;
+            string ipv4FourthBoxValue = ipv4FourthBox.Text;
+            */
             if (ipv4FirstBoxValue != -1 && ipv4SocondBoxValue != -1 && ipv4ThirdBoxValue != -1 && ipv4FourthBoxValue != -1)
             {
                 // importBtn.Enabled = true;
@@ -794,26 +927,27 @@ namespace NBEWindowsFormApplication
 
         private void ipv4SocondBox_TextChanged(object sender, EventArgs e)
         {
-            if (ipv4Check)
-            {
-                defaultGatewayFourthBox.ReadOnly = false;
-            }
-            else
-            {
-                defaultGatewayFourthBox.ReadOnly = true;
-            }
-            defaultGatewaySocondBox.Text = ipv4SocondBox.Text;
 
+
+            defaultGatewayFirstBox.Text = ipv4FirstBox.Text;
             int outputValue = 0;
-            int ipv4FirstBoxValue = int.TryParse(ipv4FirstBox.Text, out outputValue) ? int.Parse(ipv4FirstBox.Text) : -1;
-            int ipv4SocondBoxValue = int.TryParse(ipv4SocondBox.Text, out outputValue) ? int.Parse(ipv4SocondBox.Text) : -1;
-            int ipv4ThirdBoxValue = int.TryParse(ipv4ThirdBox.Text, out outputValue) ? int.Parse(ipv4ThirdBox.Text) : -1;
-            int ipv4FourthBoxValue = int.TryParse(ipv4FourthBox.Text, out outputValue) ? int.Parse(ipv4FourthBox.Text) : -1;
-            if (ipv4FirstBoxValue != -1 && ipv4SocondBoxValue != -1 && ipv4ThirdBoxValue != -1 && ipv4FourthBoxValue != -1)
+            /*
+               int ipv4FirstBoxValue = int.TryParse(ipv4FirstBox.Text, out outputValue) ? int.Parse(ipv4FirstBox.Text) : -1;
+              int ipv4SocondBoxValue = int.TryParse(ipv4SocondBox.Text, out outputValue) ? int.Parse(ipv4SocondBox.Text) : -1;
+              int ipv4ThirdBoxValue = int.TryParse(ipv4ThirdBox.Text, out outputValue) ? int.Parse(ipv4ThirdBox.Text) : -1;
+              int ipv4FourthBoxValue = int.TryParse(ipv4FourthBox.Text, out outputValue) ? int.Parse(ipv4FourthBox.Text) : -1;
+
+              */
+            string ipv4FirstBoxValue = ipv4FirstBox.Text;
+            string ipv4SocondBoxValue = ipv4SocondBox.Text;
+            string ipv4ThirdBoxValue = ipv4ThirdBox.Text;
+            string ipv4FourthBoxValue = ipv4FourthBox.Text;
+
+            if (ipv4FirstBoxValue != "" && ipv4SocondBoxValue != "" && ipv4ThirdBoxValue != "" && ipv4FourthBoxValue != "")
             {
                 // importBtn.Enabled = true;
                 ipv4Check = true;
-                //   importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
+                //importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck,remotePeerCheck);
                 if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
                 {
                     importBtn.Enabled = true;
@@ -841,12 +975,11 @@ namespace NBEWindowsFormApplication
                 ipv4Success.Visible = false;
                 ipv4FalseLogo.Visible = true;
             }
-            if (ipv4FirstBoxValue == -1 && ipv4SocondBoxValue == -1 && ipv4ThirdBoxValue == -1 && ipv4FourthBoxValue == -1)
+            if (ipv4FirstBoxValue == "" && ipv4SocondBoxValue == "" && ipv4ThirdBoxValue == "" && ipv4FourthBoxValue == "")
             {
                 ipv4Success.Visible = false;
                 ipv4FalseLogo.Visible = false;
             }
-
 
             if (ipv4Check)
             {
@@ -967,14 +1100,14 @@ namespace NBEWindowsFormApplication
 
 
             //============ Cash Profiles Box Values===============
-           
+
 
             //============ Cash profiles  Box Values===============
 
 
 
 
-            // MessageBox.Show("IPv4: "+ ipv4FirstBoxValue+"."+ ipv4SocondBoxValue+"."+ ipv4ThirdBoxValue+"."+ ipv4FourthBoxValue+"\n"+
+            // //.Show("IPv4: "+ ipv4FirstBoxValue+"."+ ipv4SocondBoxValue+"."+ ipv4ThirdBoxValue+"."+ ipv4FourthBoxValue+"\n"+
             //  "SubnetMask : "+subnetMaskFirstBoxValue+ subnetMaskSocondBoxValue+ subnetMaskThirdBoxValue + subnetMaskFourthBoxValue +"\n"+
             //  "Default Gateway : "+defaultGatewayFirstBoxValue+ defaultGatewaySocondBoxValue+ defaultGatewayThirdBoxValue+ defaultGatewayFourthBoxValue+"\n"+
             //  "PortNumber : "+portNumberBoxValue+"\n"+
@@ -983,26 +1116,44 @@ namespace NBEWindowsFormApplication
             // "Ipv4Summ = "+ ipv4Address+ "\n"+
             //  "subnetMaskSumm:  "+ subnetMask
             //   );
-            MessageBox.Show("Ipv4: " + ipv4Address + 
-                "\n" + "Default Gateway: " + defaultGateWay +
-                "\n" + "Subnet Mask:" + subnetMask+
-                "\n"+"PortNumber: "+ portNumber+ 
-                "\n"+"LocalPort: "+ localPortBox.Text+
-                "\n"+ "TerminalID:"+terminalId+
-                "\n"+"Camera Machine Number"+cameraMachineNumber+
-                "\n"+"Computer Name:"+computerName+
-                "\n"+"RemotePeer:"+remotePeer
-                );
 
-            // MessageBox.Show(publicClass.testt());
-            // string test = publicClass.GetLocalIPAddress();
-            //MessageBox.Show(test);
-            // if (ipv4Check && defaultGatewayCheck && subnetMaskCheck) {
-            //publicClass.changeIpAddress(ipv4Address, defaultGateWay, subnetMask);
+            var changedData = "             Impact List     \n\n\n";
+            if (ipv4Check) changedData = changedData + "Ipv4:   " + ipv4Address + "\n" + "\n";
+            if (cashProfileCheck) changedData = changedData + "CashProfile:   " + selectedCashProfile.Text + "\n" + "\n";
+            if (subnetMaskCheck) changedData = changedData + "Subnet Mask:   " + subnetMask + "\n" + "\n";
+            if (portNumberCheck) changedData = changedData + "PortNumber:   " + portNumber + "\n" + "\n";
+            if (portNumberCheck) changedData = changedData + "LocalPort:   " + localPortBox.Text + "\n" + "\n";
+            if (terminalIdCheck) changedData = changedData + "TerminalID:   " + terminalId + "\n" + "\n";
+            if (cameraMachineNumberCheck) changedData = changedData + "CameraMachineNumber:   " + cameraMachineNumber + "\n" + "\n";
+            if (computerNameCheck) changedData = changedData + "Computer Name:   " + computerName + "\n" + "\n";
+            if (remotePeerCheck) changedData = changedData + "RemotePeer:   " + remotePeer + "\n" + "\n";
 
-            //}
-            
-             var key1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wincor Nixdorf", true);
+
+            MessageBox.Show(changedData);
+               /*
+               MessageBox.Show("Ipv4: " + ipv4Address + 
+               "\n" + "Default Gateway: " + defaultGateWay +
+               "\n" + "Subnet Mask:" + subnetMask +
+               "\n" + "PortNumber: " + portNumber +
+               "\n" + "LocalPort: " + localPortBox.Text +
+               "\n" + "TerminalID:" + terminalId +
+               "\n" + "Camera Machine Number" + cameraMachineNumber +
+               "\n" + "Computer Name:" + computerName +
+               "\n" + "RemotePeer:" + remotePeer+
+               "\n" + "CashProfile" + selectedCashProfile.Text
+                   );
+               */
+
+
+               // //.Show(publicClass.testt());
+               // string test = publicClass.GetLocalIPAddress();
+               ////.Show(test);
+               // if (ipv4Check && defaultGatewayCheck && subnetMaskCheck) {
+               //publicClass.changeIpAddress(ipv4Address, defaultGateWay, subnetMask);
+
+               //}
+
+               var key1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wincor Nixdorf", true);
             var key2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Wincor Nixdorf", true);
             
            regkeyPath = @"SOFTWARE\Wincor Nixdorf";
@@ -1048,8 +1199,9 @@ namespace NBEWindowsFormApplication
 
             //getting the value
             //string data = key.GetValue("TRANSPORTSIZE").ToString();  //returns the text found in 'someValue'
-           // key1.SetValue("PORTNUMBER", "2222");
-          //  key1.Close();
+            // key1.SetValue("PORTNUMBER", "2222");
+            //  key1.Close();
+            publicClass2.generatePDFLog(ipv4Address,subnetMask,defaultGateWay,portNumber,localPortBox.Text,terminalId,cameraMachineNumber,computerName,selectedCashProfile.Text);
 
         }
 
@@ -1392,8 +1544,11 @@ namespace NBEWindowsFormApplication
         private void cameraMachineNumberBox_TextChanged(object sender, EventArgs e)
         {
 
-            int cameraMachineNumberBoxValue = int.TryParse(cameraMachineNumberBox.Text, out outputValue) ? int.Parse(cameraMachineNumberBox.Text) : -1;
-            if (cameraMachineNumberBoxValue != -1 && cameraMachineNumberBoxValue.ToString().Length == 8) {
+            // int cameraMachineNumberBoxValue = int.TryParse(cameraMachineNumberBox.Text, out outputValue) ? int.Parse(cameraMachineNumberBox.Text) : -1;
+            string cameraMachineNumberBoxValue = cameraMachineNumberBox.Text;
+
+
+            if (cameraMachineNumberBoxValue != "" && cameraMachineNumberBoxValue.ToString().Length == 8) {
                 cameraMachineNumberCheck = true;
                 // importBtn.Enabled = publicClass.btnCheck(ipv4Check, subnetMaskCheck, defaultGatewayCheck, portNumberCheck, terminalIdCheck, cameraMachineNumberCheck, computerNameCheck, remotePeerCheck);
                 if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
@@ -1423,7 +1578,7 @@ namespace NBEWindowsFormApplication
                 cameraMachineNumberSuccessLogo.Visible = false;
                     cameraMachineNumberFalseLogo.Visible = true;
                 }
-            if (cameraMachineNumberBoxValue == -1)
+            if (cameraMachineNumberBoxValue == "")
             {
                 cameraMachineNumberSuccessLogo.Visible = false;
                 cameraMachineNumberFalseLogo.Visible = false;
@@ -1665,8 +1820,13 @@ namespace NBEWindowsFormApplication
                  type2Value.Text = "20";
                   type3Value.Text = "50";
                 type4Value.Text = "100";
-                
-                 selectedCashProfile.Text = "AMCR";
+
+            currency4Value.Text = "EGP";
+            currency3Value.Text = "EGP";
+            currency2Value.Text = "EGP";
+            currency1Value.Text = "EGP";
+
+            selectedCashProfile.Text = "AMCR";
             if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
             {
                 importBtn.Enabled = true;
@@ -1716,8 +1876,13 @@ namespace NBEWindowsFormApplication
             type3Value.Text = "100";
             type4Value.Text = "200";
 
+            currency4Value.Text = "EGP";
+            currency3Value.Text = "EGP";
+            currency2Value.Text = "EGP";
+            currency1Value.Text = "EGP";
+
             selectedCashProfile.Text = "New Forex";
-            //  MessageBox.Show(cashProfileCheck.ToString());
+            //  //.Show(cashProfileCheck.ToString());
             if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
             {
                 importBtn.Enabled = true;
@@ -1736,9 +1901,14 @@ namespace NBEWindowsFormApplication
                  type2Value.Text = "10";
                   type3Value.Text = "50";
                 type4Value.Text = "200";
-                
-                 selectedCashProfile.Text = "Old Forex";
-            // MessageBox.Show(cashProfileCheck.ToString());
+
+            currency4Value.Text = "EGP";
+            currency3Value.Text = "EGP";
+            currency2Value.Text = "EGP";
+            currency1Value.Text = "EGP";
+
+            selectedCashProfile.Text = "Old Forex";
+            // //.Show(cashProfileCheck.ToString());
             if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
             {
                 importBtn.Enabled = true;
@@ -1759,8 +1929,13 @@ namespace NBEWindowsFormApplication
             type3Value.Text = "100";
             type4Value.Text = "200";
 
+            currency4Value.Text = "EGP";
+            currency3Value.Text = "EGP";
+            currency2Value.Text = "EGP";
+            currency1Value.Text = "EGP";
+
             selectedCashProfile.Text = "Cash";
-            //MessageBox.Show(cashProfileCheck.ToString());
+            ////.Show(cashProfileCheck.ToString());
             if ((ipv4Check && subnetMaskCheck && defaultGatewayCheck) || portNumberCheck || terminalIdCheck || cameraMachineNumberCheck || computerNameCheck || remotePeerCheck || cashProfileCheck)
             {
                 importBtn.Enabled = true;
@@ -1793,6 +1968,64 @@ namespace NBEWindowsFormApplication
                     importBtn.Enabled = false;
                 }
          
+        }
+
+        private void label54_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cameraHDDDriveLetterFixButton_Click(object sender, EventArgs e)
+        {
+            //.Show(publicClass2.firstDriveCollectedLetters.Count.ToString());
+            Process process2 = new Process();
+            process2.StartInfo.FileName = "cmd.exe";
+            process2.StartInfo.CreateNoWindow = false;
+            process2.StartInfo.RedirectStandardInput = true;
+            process2.StartInfo.RedirectStandardOutput = false;
+            process2.StartInfo.UseShellExecute = false;
+            process2.Start();
+           // process2.StandardInput.WriteLine("ipconfig");
+            process2.StandardInput.WriteLine("diskpart");
+            process2.StandardInput.WriteLine("list vol");
+            process2.StandardInput.WriteLine($"select volume {publicClass2.drive0PartitionsNumber}");
+            process2.StandardInput.WriteLine("assign letter=F");
+
+            process2.StandardInput.Flush();
+          process2.StandardInput.Close();
+            process2.WaitForExit();
+        }
+
+        private void bitmapsFolderItemsText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string newFile = @".\Data\ConfigData.xml";
+
+            File.Copy(newFile, @"C:\Protopas\bin\ConfigData.xml", true);
+            MessageBox.Show("ConfigData.XML ADDED");
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true) {
+                button2.Enabled = true;
+            }
+            else button2.Enabled = false;   
+        }
+
+        private void audioNumberOfFilesTrueCheck_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
